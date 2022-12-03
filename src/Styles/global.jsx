@@ -11,7 +11,10 @@ export const GlobalStyles=createGlobalStyle`
         padding:0;
         margin:0;
         transition:all 0.25s linear;
-        
+        overflow-y:scroll;
+    }
+    body::webkit-scrollbar{
+        diaply:none;
     }
     .canvas{
         display:grid;
