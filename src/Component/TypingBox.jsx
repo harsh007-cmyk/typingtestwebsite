@@ -30,6 +30,9 @@ function TypingBox() {
 
 
   const [wordsArray,setWordArray]=useState(()=>{
+    if(testMode==='words'){
+      return randomwords(testWords);
+    }
     return randomwords(100);
   })
 
@@ -62,7 +65,8 @@ function TypingBox() {
       setCountDown(countDown=>{
         setCorrectChars((correctChars)=>{
           setGraphData((data)=>{
-            return [...data,[testTime-countDown,Math.round((correctChars/5))/(testTime-countDown+1)/60]]
+            const startTime=(testMode==='words')?180:testTime;
+            return [...data,[startTime-countDown,Math.round((correctChars/5))/(testTime-countDown+1)/60]]
           })
           return correctChars;
         })
@@ -90,7 +94,11 @@ function TypingBox() {
     
 
       if(e.keyCode===32){    
-        
+        if(currentwordIndex===wordsArray.length-1){
+           clearInterval(intervalId);
+           setTestOver(true);
+           return;
+        }
         const correctChars=wordSpanRef[currentwordIndex].current.querySelectorAll('.correct');
         const incorrectChars=wordSpanRef[currentwordIndex].current.querySelectorAll('.not_correct');
         setMissedChars(missedChars+(allChildrenSpans.length-(correctChars.length+incorrectChars.length)));
@@ -176,7 +184,8 @@ const calculateAccuracy=()=>{
 }
 
 const calculateWPM=()=>{
-  return Math.round((correctChars/5)/(testTime/60));
+  const gdata=(graphDatas[graphDatas.length-1][0]+1)/60;
+  return Math.round((correctChars/5)/gdata);
 }
   
 
@@ -188,7 +197,7 @@ useEffect(() => {
   resetTest();
 
 
-}, [testTime]);
+}, [testTime,testMode,testWords]);   
 
 
 const resetTest=()=>{
@@ -198,8 +207,15 @@ const resetTest=()=>{
   setTestOver(false);
   clearInterval(intervalId);
   setCountDown(testTime);
-  let random=randomwords(100);
-  setWordArray(random);
+  if(testMode==='words'){
+    let random=randomwords(testWords);
+    setWordArray(random);
+    setCountDown(180);
+  }else{
+    let random=randomwords(100);
+    setWordArray(random);
+  }
+
   resetWordSpanRefClassNames();
   
 }

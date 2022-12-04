@@ -97,22 +97,25 @@ export const GlobalStyles=createGlobalStyle`
         color: ${({theme})=> theme.typeBoxText}
 
     }
-    .time-modes{
+    .time-modes, .word-mode{
         display:flex;
 
     }
     .counter{
         cursor:none;
     }
-    .time{
+    .time, .no-of-words{
         margin-right:15px;
     }
 
-    .time:hover{
+    .time:hover, .no-of-words:hover{
         color: ${({theme})=> theme.title};
         cursor:pointer;
     }
-    
+    .mode:hover{
+        color:${({theme})=>theme.title};
+        cursor:pointer;   
+    }
     .stat-box{
         display:flex;
         max-width:1000px;
