@@ -11,16 +11,23 @@ function TypingBox() {
   const [currentCharIndex,setCurrentCharIndex]=useState(0);
   const [correctChars,setCorrectChars]=useState(0);
   const [correctWords,setCorrectWords]=useState(0);
-  let [countDown,setCountDown]=useState(15);
+  const {testTime,testMode,testWords}=useTestMode();
+  const [countDown, setCountDown] = useState(()=>{
+    if(testMode==='words'){
+        return 180;
+    }
+    else{
+        return testTime;
+    }
+});
   const [testStart, setTestStart] = useState(false);
    const [incorrectChars, setincorrectChars] = useState(0);
   const [extraChars, setExtraChars] = useState(0);
   const [missedChars, setMissedChars] = useState(0);
   const [testOver,setTestOver]=useState(false);
-  const {testTime}=useTestMode();
   const[intervalId,setIntervalId]=useState(null);
   const [graphDatas,setGraphData]=useState([]);
-  
+
 
   const [wordsArray,setWordArray]=useState(()=>{
     return randomwords(100);
@@ -161,8 +168,9 @@ function TypingBox() {
 
 
 const calculateAccuracy=()=>{
-  
+  console.log(currentwordIndex,correctWords);
   console.log((correctWords/currentwordIndex)*100);
+
     let acc=(correctWords/currentwordIndex)*100;
    return acc;
 }

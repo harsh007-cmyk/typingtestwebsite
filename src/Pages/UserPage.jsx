@@ -1,7 +1,8 @@
 import React from 'react';
-import { CircularProgress, Tab, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import { Tab, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import { CircularProgress } from '@material-ui/core'
 import { useAuthState } from 'react-firebase-hooks/auth';
 import Graph from '../Component/Graph';
 import { db, auth } from '../firebaseConfig';
@@ -9,7 +10,7 @@ import { useTheme } from '../Context/ThemeContext';
 import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 function UserPage() {
     const{theme}=useTheme();
- const[dataLoaiding,setDataLoading]=useState([]);
+ const[dataLoading,setDataLoading]=useState([]);
  const[data,setData]=useState([]);
  const[graphData,setGraphData]=useState([]);
  const[user,loading]=useAuthState(auth);
@@ -37,8 +38,13 @@ function UserPage() {
 },[loading]);
 
 
-if(loading){
-  return (<CircularProgress size={200} />);
+if(loading||dataLoading){
+  return (
+    <div className="center-screen">
+        <CircularProgress size={100} color={theme.title}/>
+    </div>
+  
+  );
 }
  console.log(data,'data');
   return (
@@ -60,7 +66,7 @@ if(loading){
             </div>
             <div className="totaltimes">
                 <span>
-                    Total Test Taken-{data.length}
+                    Total Test Taken {data.length}
                 </span>
             </div>
         </div>

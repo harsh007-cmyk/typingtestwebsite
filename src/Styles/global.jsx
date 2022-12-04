@@ -161,4 +161,53 @@ export const GlobalStyles=createGlobalStyle`
         background:${({theme})=>theme.typeBoxText};
         border-radius:20px;
     }
+    .users-profie{
+        width:1000px;
+        margin:auto;
+    }
+    .result-graph{
+        width: 1000px;
+        margin: auto;
+    }
+    .user{
+        display:flex;
+        width: 50%;
+        justify-content: center;
+        margin-top: 30px;
+        margin-bottom: 30px;
+        padding: 1rem;
+        border-right: 2px solid;
+    }
+    .users-profile{
+        width:700px;
+        margin:auto;
+        display: flex;
+        min-height: 15rem;
+        background: ${({theme})=> theme.typeBoxText};
+        border-radius: 20px;
+    }
+    .user-picture{
+        width:50%;
+    }
+    .userifo{
+        width: 50%;
+        margin-top: 1rem;
+        font-size: 1.5rem;
+        text-align: center;
+        padding: 1rem;
+    }
+    .center-screen{
+        display:flex;
+        min-height:100vh;
+        justify-content:center;
+        align-items: center;
+        text-align: center;
+    }
+    .totaltimes{
+        width: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 3rem;
+    }
 `
