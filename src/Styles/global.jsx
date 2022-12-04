@@ -213,4 +213,34 @@ export const GlobalStyles=createGlobalStyle`
         align-items: center;
         font-size: 3rem;
     }
+    .footer{
+        display:flex,
+        flex-direction:column,
+        width:1000px;
+        margin-right:auto;
+        align-items:center;
+        height:60px;
+    }
+    .actual-footer{
+        display:flex;
+        justify-content:space-between;
+        width:1000px;
+    }
+    .hint{
+        kbd{
+            background-color: ${({theme})=>theme.title};
+            color: ${({theme})=>theme.background};
+            padding: 2.5px 5px;
+            border-radius: 3px;
+        }
+    }
+    .instructions{
+        color: ${({theme})=>theme.title}
+    }
+    .reset-button{
+        display: block;
+        margin: auto;
+        margin-top:3rem;
+        transform: scale(2);
+    }
 `
